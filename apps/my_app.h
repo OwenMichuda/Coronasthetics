@@ -4,11 +4,14 @@
 #define FINALPROJECT_APPS_MYAPP_H_
 
 #include <cinder/app/App.h>
+#include <mylibrary/plan.h>
 
 
 namespace myapp {
 
 class MyApp : public cinder::app::App {
+ private:
+  workout::Plan plan_;
  public:
   MyApp();
   void setup() override;
