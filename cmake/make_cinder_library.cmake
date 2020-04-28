@@ -136,7 +136,7 @@ function( ci_make_library )
     add_library( ${ARG_LIBRARY_NAME} ${ARG_SOURCES} ${ICON_PATH} ${ARG_RESOURCES} )
 
     target_include_directories( ${ARG_LIBRARY_NAME} PUBLIC ${ARG_INCLUDES} )
-    target_link_libraries( ${ARG_LIBRARY_NAME} cinder ${ARG_LIBRARIES} )
+    target_link_libraries( ${ARG_LIBRARY_NAME} cinder ${ARG_LIBRARIES})
 
     if( MSVC )
         # Ignore Specific Default Libraries for Debug build

@@ -1,10 +1,9 @@
 // Copyright (c) 2020 [Your Name]. All rights reserved.
 
-#include <C:\Users\Owen Michuda\Downloads\cinder_0.9.2_vc2015\cinder_0.9.2_vc2015\my-projects\final-project\cmake-build-debug\_deps\gflags-build\include\gflags\gflags.h>
+#include <gflags/gflags.h>
 #include <cinder/app/App.h>
 #include <cinder/app/RendererGl.h>
 
-#include "../cmake-build-debug/_deps/gflags-build/include/gflags/gflags.h"
 #include "my_app.h"
 
 using cinder::app::App;
@@ -18,6 +17,11 @@ namespace myapp {
 const int kSamples = 8;
 const int kWidth = 1600;
 const int kHeight = 1600;
+
+DEFINE_bool(add_exercise, true, "Whether to add a new exercise to the database");
+DEFINE_string(exercise_name, "crunches", "The name of the exercise");
+DEFINE_string(exercise_target_area, "core", "The target area of the exercise");
+DEFINE_string(exercise_description, "laying with your back on the ground and your knees bent, curl your torso up until your shoulder blades are off the floor.", "The description of the exercise");
 
 DEFINE_bool(arms, true, "Whether to include arms in the workout");
 DEFINE_bool(shoulders, true, "Whether to include shoulders in the workout");

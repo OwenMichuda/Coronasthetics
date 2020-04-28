@@ -8,16 +8,11 @@
 
 namespace workout {
 
-Exercise :: Exercise(const std::string& name, const std::string& description) {
+Exercise :: Exercise(const std::string& name, const std::string& description,
+    const std::string& target_area) {
   name_ = name;
   description_ = description;
+  target_area_ = target_area;
 }
 
-std::string Exercise :: GetName() {
-  return name_;
-}
-
-std::string Exercise ::GetDescription() {
-  return description_;
-}
 }

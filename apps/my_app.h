@@ -4,14 +4,18 @@
 #define FINALPROJECT_APPS_MYAPP_H_
 
 #include <cinder/app/App.h>
+#include <mylibrary/exercise_database.h>
+#include <mylibrary/exercise.h>
 #include <mylibrary/plan.h>
-
 
 namespace myapp {
 
 class MyApp : public cinder::app::App {
  private:
   workout::Plan plan_;
+  workout::ExerciseDatabase exercise_database_;
+  bool add_exercise_;
+
  public:
   MyApp();
   void setup() override;

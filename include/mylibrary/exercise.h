@@ -10,13 +10,12 @@
 namespace workout {
 
 class Exercise {
- private:
+ public:
   std::string name_;
   std::string description_;
- public:
-  Exercise(const std::string& name, const std::string& description);
-  std::string GetName();
-  std::string GetDescription();
+  std::string target_area_;
+  Exercise(const std::string& name, const std::string& description,
+      const std::string& target_area);
 };
 
 }
