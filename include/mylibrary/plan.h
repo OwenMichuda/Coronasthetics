@@ -6,6 +6,7 @@
 #define FINALPROJECT_PLAN_H
 
 #include "exercise.h"
+#include "exercise_database.h"
 
 #include <string>
 #include <vector>
@@ -23,6 +24,7 @@ class Plan {
   bool legs_;
  public:
   explicit Plan(bool arms, bool shoulders, bool chest, bool core, bool back, bool legs);
+  void GeneratePlan(ExerciseDatabase database);
 };
 
 }

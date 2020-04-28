@@ -10,6 +10,9 @@
 #include "exercise_database.h"
 #include "exercise.h"
 
+#include <vector>
+#include <string>
+
 namespace workout {
 
 class ExerciseDatabase {
@@ -18,6 +21,7 @@ class ExerciseDatabase {
  public:
   explicit ExerciseDatabase(const std::string& db_path);
   void AddExerciseToDatabase(const Exercise&);
+  std::vector<Exercise> GetTargetExercises(const std::string& target_area, const size_t limit);
 };
 
 }
