@@ -38,6 +38,8 @@ void MyApp::setup() {
     workout::Exercise new_exercise(FLAGS_exercise_name, FLAGS_exercise_description, FLAGS_exercise_target_area);
     exercise_database_.AddExerciseToDatabase(new_exercise);
   }
+
+  plan_.GeneratePlan(exercise_database_);
 }
 
 void MyApp::update() { }

@@ -15,7 +15,6 @@ namespace workout {
 
 class Plan {
  private:
-  std::vector<Exercise> exercises_;
   bool arms_;
   bool shoulders_;
   bool chest_;
@@ -23,6 +22,7 @@ class Plan {
   bool back_;
   bool legs_;
  public:
+  std::vector<Exercise> exercises_;
   explicit Plan(bool arms, bool shoulders, bool chest, bool core, bool back, bool legs);
   void GeneratePlan(ExerciseDatabase database);
 };
