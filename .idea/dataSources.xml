@@ -7,7 +7,7 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/assets/exercises.db</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="past_workout.db" uuid="d3aa2a5d-56fb-4039-bf35-b0d5ea19f14d">
+    <data-source source="LOCAL" name="past_workouts.db" uuid="718923e2-ea03-44aa-be5a-754a76e95793">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

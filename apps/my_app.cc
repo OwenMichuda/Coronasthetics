@@ -9,6 +9,9 @@
 #include <cinder/Vector.h>
 #include <cinder/gl/draw.h>
 #include <cinder/gl/gl.h>
+#include <cinder/Log.h>
+
+#include <iostream>
 
 namespace myapp {
 
@@ -31,20 +34,45 @@ DECLARE_bool(legs);
 MyApp::MyApp()
     : plan_(FLAGS_arms, FLAGS_shoulders, FLAGS_chest, FLAGS_core, FLAGS_back, FLAGS_legs),
       exercise_database_(cinder::app::getAssetPath("exercises.db").string()),
-      add_exercise_{FLAGS_add_exercise} {}
+      workouts_database_(cinder::app::getAssetPath("past_workouts.db").string()),
+      add_exercise_{FLAGS_add_exercise},
+      state_{State::kContinue} {}
 
 void MyApp::setup() {
+  cinder::gl::enableDepthWrite();
+  cinder::gl::enableDepthRead();
+
   if (add_exercise_) {
     workout::Exercise new_exercise(FLAGS_exercise_name, FLAGS_exercise_description, FLAGS_exercise_target_area);
     exercise_database_.AddExerciseToDatabase(new_exercise);
   }
-
   plan_.GeneratePlan(exercise_database_);
 }
 
-void MyApp::update() { }
+void DrawStart() {
+}
 
-void MyApp::draw() {}
+void DrawBackground() {
+  // Light blue
+  cinder::gl::clear(Color(.678, .847, .902));
+}
+
+void MyApp::update() {
+  if (state_ == State::kContinue) {
+  }
+
+  if (state_ == State::kFinished) {
+    workouts_database_.AddWorkoutToDatabase(plan_);
+  }
+
+  if (state_ == State::kPaused) {
+
+  }
+}
+
+void MyApp::draw() {
+  DrawBackground();
+}
 
 void MyApp::keyDown(KeyEvent event) { }
 

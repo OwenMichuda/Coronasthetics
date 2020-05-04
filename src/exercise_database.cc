@@ -30,8 +30,8 @@ std::vector<Exercise> GetExercises(sqlite::database_binder* rows) {
     std::string target;
     std::string description;
     row >> name >> target >> description;
-    //Exercise exercise = Exercise(name, description, target);
-    //exercises.push_back(exercise);
+    Exercise exercise = Exercise(name, description, target);
+    exercises.push_back(exercise);
   }
 
   return exercises;

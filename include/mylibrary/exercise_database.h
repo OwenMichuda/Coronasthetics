@@ -7,7 +7,6 @@
 
 #include <C:\Users\Owen Michuda\Downloads\cinder_0.9.2_vc2015\cinder_0.9.2_vc2015\my-projects\final-project\cmake-build-debug\_deps\sqlite-modern-cpp-src\hdr\sqlite_modern_cpp.h>
 
-#include "exercise_database.h"
 #include "exercise.h"
 
 #include <vector>
