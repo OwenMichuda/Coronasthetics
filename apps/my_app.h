@@ -3,11 +3,14 @@
 #ifndef FINALPROJECT_APPS_MYAPP_H_
 #define FINALPROJECT_APPS_MYAPP_H_
 
+#include <cinder/Font.h>
 #include <cinder/app/App.h>
-#include <mylibrary/workouts_database.h>
-#include <mylibrary/exercise_database.h>
+#include <cinder/app/RendererGl.h>
+#include <cinder/gl/gl.h>
 #include <mylibrary/exercise.h>
+#include <mylibrary/exercise_database.h>
 #include <mylibrary/plan.h>
+#include <mylibrary/workouts_database.h>
 
 namespace myapp {
 
@@ -24,6 +27,13 @@ class MyApp : public cinder::app::App {
   bool add_exercise_;
   workout::WorkoutsDatabase workouts_database_;
   State state_;
+  ci::Timer timer_;
+  workout::Exercise current_exercise_;
+ private:
+  void DrawBackground();
+  void DrawTimer();
+  void DrawText();
+  cinder::TextBox GetTextBox(const std::string& text, const cinder::Color& color, const cinder::Font& font);
  public:
   MyApp();
   void setup() override;
