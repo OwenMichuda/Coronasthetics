@@ -56,5 +56,8 @@ void Plan::GeneratePlan(ExerciseDatabase database) {
     }
   }
 }
+Exercise Plan::GetExerciseAtIndex(int index) {
+  return exercises_.at(index);
+}
 
 }

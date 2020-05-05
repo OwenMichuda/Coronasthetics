@@ -16,6 +16,8 @@ class Exercise {
   std::string target_area_;
   Exercise(const std::string& name, const std::string& description,
       const std::string& target_area);
+  Exercise();
+  Exercise(const Exercise& exercise);
 };
 
 }

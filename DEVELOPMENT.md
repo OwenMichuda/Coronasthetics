@@ -9,3 +9,7 @@
     - Need to implement removing from database, and selecting from database
     - Need to implement database for past workouts
   
+- **5/3/20** Started user interface
+    - Made the timer in the middle of the screen that dictates how long to do each exercises.
+    - Started working on adding the exercise name and description to the screen.
+    - Ran into a hitch, yet to figure it out. "Vector iterator is not dereferenable"

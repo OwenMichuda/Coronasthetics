@@ -23,7 +23,6 @@ enum class State {
 class MyApp : public cinder::app::App {
  private:
   workout::Plan plan_;
-  workout::ExerciseDatabase exercise_database_;
   bool add_exercise_;
   workout::WorkoutsDatabase workouts_database_;
   State state_;
@@ -33,7 +32,6 @@ class MyApp : public cinder::app::App {
   void DrawBackground();
   void DrawTimer();
   void DrawText();
-  cinder::TextBox GetTextBox(const std::string& text, const cinder::Color& color, const cinder::Font& font);
  public:
   MyApp();
   void setup() override;

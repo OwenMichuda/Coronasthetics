@@ -21,4 +21,10 @@ TEST_CASE("Testing GetExercises") {
   for (workout::Exercise core : core_list) {
     std::cout << core.name_ << std::endl;
   }
+
+  workout::Plan plan = workout::Plan(true, false, true, false, true, false);
+  plan.GeneratePlan(test);
+  for (workout::Exercise exercise : plan.exercises_) {
+    //std::cout << exercise.name_ << std::endl;
+  }
 }

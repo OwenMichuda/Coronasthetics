@@ -14,5 +14,15 @@ Exercise :: Exercise(const std::string& name, const std::string& description,
   description_ = description;
   target_area_ = target_area;
 }
+Exercise::Exercise() {
+  name_ = "";
+  description_ = "";
+  target_area_ = "";
+}
+Exercise::Exercise(const Exercise& exercise) {
+  name_ = exercise.name_;
+  description_ = exercise.description_;
+  target_area_ = exercise.target_area_;
+}
 
 }
