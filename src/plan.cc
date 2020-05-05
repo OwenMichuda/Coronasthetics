@@ -20,8 +20,10 @@ Plan::Plan(bool arms, bool shoulders, bool chest, bool core, bool back,
 }
 
 void Plan::GeneratePlan(ExerciseDatabase database) {
+  workout::Exercise test = workout::Exercise("test", "test", "test");
+  exercises_.push_back(test);
   if (arms_) {
-    for (const Exercise& arms_exercise : database.GetTargetExercises("arms", kLimit)) {
+    for (const Exercise& arms_exercise : database.GetTargetExercises("arms", 5)) {
       exercises_.push_back(arms_exercise);
     }
   }

@@ -47,7 +47,7 @@ MyApp::MyApp()
     : plan_(FLAGS_arms, FLAGS_shoulders, FLAGS_chest, FLAGS_core, FLAGS_back, FLAGS_legs),
       workouts_database_(cinder::app::getAssetPath("past_workouts.db").string()),
       add_exercise_{FLAGS_add_exercise},
-      current_exercise_{},
+      current_exercise_(),
       state_{State::kContinue} {
 }
 
@@ -55,7 +55,21 @@ void MyApp::setup() {
   cinder::gl::enableDepthWrite();
   cinder::gl::enableDepthRead();
 
-  workout::ExerciseDatabase exercise_database(R"(C:\Users\Owen Michuda\Downloads\cinder_0.9.2_vc2015\cinder_0.9.2_vc2015\my-projects\final-project\assets\exercises.db)");
+  /*
+  workout::ExerciseDatabase test(cinder::app::getAssetPath("exercises.db").string());
+  std::vector<workout::Exercise> core_list = test.GetTargetExercises("core", 5);
+  for (workout::Exercise core : core_list) {
+    std::cout << core.name_ << std::endl;
+  }
+
+  workout::Plan plan = workout::Plan(true, false, true, false, true, false);
+  plan.GeneratePlan(test);
+  for (workout::Exercise exercise : plan.exercises_) {
+    std::cout << exercise.name_ << std::endl;
+  }
+   */
+
+  workout::ExerciseDatabase exercise_database(cinder::app::getAssetPath("C:\\Users\\Owen Michuda\\Downloads\\cinder_0.9.2_vc2015\\cinder_0.9.2_vc2015\\my-projects\\final-project\\assets\\exercises.db").string());
 
   if (add_exercise_) {
     Exercise new_exercise(FLAGS_exercise_name, FLAGS_exercise_description, FLAGS_exercise_target_area);
