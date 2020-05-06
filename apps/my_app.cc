@@ -129,16 +129,21 @@ void MyApp::setup() {
 }
 
 void MyApp::update() {
-  const auto timer = system_clock::now();
-  const auto time_since_switch = timer - last_switch_;
+  const auto time = system_clock::now();
 
-  if (time_since_switch > seconds(kTimeForExercise)) {
-    last_switch_ = timer;
-    timer_.start(0);
-    ++exercise_index_;
-    current_exercise_ = exercise_vec_.at(exercise_index_);
+  if (state_ == State::kContinue) {
+    if (timer_.isStopped()) {
+      timer_.resume();
+    }
+
+    const auto time_since_switch = time - last_switch_;
+    if (time_since_switch > seconds(kTimeForExercise)) {
+      last_switch_ = time;
+      timer_.start(0);
+      ++exercise_index_;
+      current_exercise_ = exercise_vec_.at(exercise_index_);
+    }
   }
-
 
   if (state_ == State::kFinished) {
     timer_.stop();
@@ -148,7 +153,6 @@ void MyApp::update() {
   if (state_ == State::kPaused) {
     timer_.stop();
   }
-
 }
 
 void MyApp::DrawBackground() {
@@ -221,6 +225,19 @@ void MyApp::draw() {
   DrawText();
 }
 
-void MyApp::keyDown(KeyEvent event) { }
+void MyApp::keyDown(KeyEvent event) {
+  switch (event.getCode()) {
+    case KeyEvent::KEY_SPACE: {
+      if (state_ == State::kContinue) {
+        state_ = State::kPaused;
+        break;
+      }
+      if (state_ == State::kPaused) {
+        state_ = State::kContinue;
+        break;
+      }
+    }
+  }
+}
 
 }  // namespace myapp

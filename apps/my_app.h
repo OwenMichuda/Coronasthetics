@@ -30,6 +30,8 @@ class MyApp : public cinder::app::App {
   workout::Exercise current_exercise_;
   std::vector<workout::Exercise> exercise_vec_;
   std::chrono::time_point<std::chrono::system_clock> last_switch_;
+  std::chrono::time_point<std::chrono::system_clock> last_pause_;
+  std::chrono::time_point<std::chrono::system_clock> last_resume_;
   int exercise_index_;
  private:
   void DrawBackground();
