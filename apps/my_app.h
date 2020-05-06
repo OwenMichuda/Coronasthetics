@@ -29,6 +29,8 @@ class MyApp : public cinder::app::App {
   ci::Timer timer_;
   workout::Exercise current_exercise_;
   std::vector<workout::Exercise> exercise_vec_;
+  std::chrono::time_point<std::chrono::system_clock> last_switch_;
+  int exercise_index_;
  private:
   void DrawBackground();
   void DrawTimer();

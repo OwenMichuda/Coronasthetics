@@ -12,11 +12,15 @@
 #include <cinder/Log.h>
 
 #include <iostream>
+#include <chrono>
+
 
 namespace myapp {
 
 using std::string;
 using std::vector;
+using std::chrono::seconds;
+using std::chrono::system_clock;
 
 using cinder::app::KeyEvent;
 using cinder::Color;
@@ -39,7 +43,7 @@ DECLARE_bool(core);
 DECLARE_bool(back);
 DECLARE_bool(legs);
 
-const double kTimeForExercise = 5;
+const int kTimeForExercise = 5;
 const Color kLightBlue = Color(.678f, .847f, .902f);
 const Color kWhite = Color(1, 1, 1);
 
@@ -48,9 +52,9 @@ MyApp::MyApp()
       workouts_database_(cinder::app::getAssetPath("past_workouts.db").string()),
       add_exercise_{FLAGS_add_exercise},
       current_exercise_(),
+      exercise_index_(-1),
       exercise_vec_(),
-      state_{State::kContinue} {
-}
+      state_{State::kContinue} {}
 
 void MyApp::setup() {
   cinder::gl::enableDepthWrite();
@@ -119,18 +123,22 @@ void MyApp::setup() {
     exercise_vec_.push_back(Exercise("wall walk", "begin in the push up position, with your feet against the wall. slowly walk your feet up the wall while concurrently bringing your hands closer to the wall. Continue to a height that feels safe, then slowly walk yourself back down.", "shoulders"));
     exercise_vec_.push_back(Exercise("static handstand", "kick yourself up onto your hands, and balance your weight while keeping your body straight. practice next to a wall if needed.", "shoulders"));
   }
+
+  current_exercise_ = exercise_vec_.front();
+
 }
 
 void MyApp::update() {
-  if (state_ == State::kContinue) {
-    if (timer_.isStopped()) {
-      timer_.resume();
-    }
-    if (static_cast<int>(timer_.getSeconds()) == static_cast<int>(kTimeForExercise) + 1) {
-      // todo: go to the next exercise
-      timer_.start(0);
-    }
+  const auto timer = system_clock::now();
+  const auto time_since_switch = timer - last_switch_;
+
+  if (time_since_switch > seconds(kTimeForExercise)) {
+    last_switch_ = timer;
+    timer_.start(0);
+    ++exercise_index_;
+    current_exercise_ = exercise_vec_.at(exercise_index_);
   }
+
 
   if (state_ == State::kFinished) {
     timer_.stop();
