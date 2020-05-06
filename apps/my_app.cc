@@ -386,6 +386,28 @@ void MyApp::DrawFinish() {
                             getWindowCenter().y * (0.5) - finish_tbox_y / 2};
 
   cinder::gl::draw(finish_texture, finish_loc);
+
+  workout::WorkoutsDatabase workout_database(
+      "C:\\Users\\Owen Michuda\\Downloads\\cinder_0.9.2_vc2015\\"
+      "cinder_0.9.2_vc2015\\my-projects\\final-project\\assets\\"
+      "past_workouts.db");
+  const vector<string> recommended_workouts = workout_database.RecommendedWorkout();
+
+  int count = 0;
+  for (string workout : recommended_workouts) {
+    TextBox exercises_tbox =
+        GetTextBox(workout, kWhite, finish_font);
+    TextureRef exercises_texture =
+        cinder::gl::Texture2d::create(exercises_tbox.render());
+
+    const float exercises_tbox_x = exercises_tbox.measure().x;
+    const float exercises_tbox_y = exercises_tbox.measure().y;
+    const ivec2 exercises_loc = {getWindowCenter().x - exercises_tbox_x / 2,
+                                 getWindowCenter().y - (exercises_tbox_y / 2) + (count * exercises_tbox_y)};
+
+    cinder::gl::draw(exercises_texture, exercises_loc);
+    ++count;
+  }
 }
 
 void MyApp::draw() {

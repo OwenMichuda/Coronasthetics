@@ -79,4 +79,109 @@ void WorkoutsDatabase :: AddWorkoutToDatabase(const Plan& plan) {
       << legs;
 }
 
+std::vector<std::string> WorkoutsDatabase::RecommendedWorkout() {
+  auto rows = database_ <<  "select arms,shoulders,chest,core,back,legs "
+                            "from workouts "
+                            "order by date desc "
+                            "limit 3 ;";
+
+  int arms_count = 0;
+  int shoulders_count = 0;
+  int chest_count = 0;
+  int core_count = 0;
+  int back_count = 0;
+  int legs_count = 0;
+  for (auto&& row : rows) {
+    std::string arms;
+    std::string shoulders;
+    std::string chest;
+    std::string core;
+    std::string back;
+    std::string legs;
+    row >> arms >> shoulders >> chest >> core >> back >> legs;
+    if (arms == "TRUE") {
+      ++arms_count;
+    }
+    if (shoulders == "TRUE") {
+      ++shoulders_count;
+    }
+    if (chest == "TRUE") {
+      ++chest_count;
+    }
+    if (core == "TRUE") {
+      ++core_count;
+    }
+    if (back == "TRUE") {
+      ++back_count;
+    }
+    if (legs == "TRUE") {
+      ++legs_count;
+    }
+  }
+
+  std::vector<std::string> results;
+  if (arms_count == 0) {
+    results.emplace_back("arms");
+  }
+  if (shoulders_count == 0) {
+    results.emplace_back("shoulders");
+  }
+  if (chest_count == 0) {
+    results.emplace_back("chest");
+  }
+  if (core_count == 0) {
+    results.emplace_back("core");
+  }
+  if (back_count == 0) {
+    results.emplace_back("back");
+  }
+  if (legs_count == 0) {
+    results.emplace_back("legs");
+  }
+
+  if (results.empty()) {
+    if (arms_count == 1) {
+      results.emplace_back("arms");
+    }
+    if (shoulders_count == 1) {
+      results.emplace_back("shoulders");
+    }
+    if (chest_count == 1) {
+      results.emplace_back("chest");
+    }
+    if (core_count == 1) {
+      results.emplace_back("core");
+    }
+    if (back_count == 1) {
+      results.emplace_back("back");
+    }
+    if (legs_count == 1) {
+      results.emplace_back("legs");
+    }
+  }
+
+  if (results.empty()) {
+    if (arms_count == 2) {
+      results.emplace_back("arms");
+    }
+    if (shoulders_count == 2) {
+      results.emplace_back("shoulders");
+    }
+    if (chest_count == 2) {
+      results.emplace_back("chest");
+    }
+    if (core_count == 2) {
+      results.emplace_back("core");
+    }
+    if (back_count == 2) {
+      results.emplace_back("back");
+    }
+    if (legs_count == 2) {
+      results.emplace_back("legs");
+    }
+  }
+
+  return results;
+}
+
 }

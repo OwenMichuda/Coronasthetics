@@ -27,9 +27,9 @@ DEFINE_string(exercise_description, "laying with your back on the ground and you
 
 DEFINE_bool(arms, true, "Whether to include arms in the workout");
 DEFINE_bool(shoulders, false, "Whether to include shoulders in the workout");
-DEFINE_bool(chest, false, "Whether to include chest in the workout");
+DEFINE_bool(chest, true, "Whether to include chest in the workout");
 DEFINE_bool(core, false, "Whether to include core in the workout");
-DEFINE_bool(back, false, "Whether to include back in the workout");
+DEFINE_bool(back, true, "Whether to include back in the workout");
 DEFINE_bool(legs, false, "Whether to include legs in the workout");
 
 void ParseArgs(vector<string>* args) {

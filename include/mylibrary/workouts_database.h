@@ -19,6 +19,7 @@ class WorkoutsDatabase {
  public:
   explicit WorkoutsDatabase(const std::string& db_path);
   void AddWorkoutToDatabase(const Plan&);
+  std::vector<std::string> RecommendedWorkout();
 };
 
 }
