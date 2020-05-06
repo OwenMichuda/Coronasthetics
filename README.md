@@ -1,4 +1,4 @@
 # Coronasthenics
 Author: Owen Michuda
 ---
-![first image](Saved Pictures/picture1.png)
+![first image](images/project1.png)
