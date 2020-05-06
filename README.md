@@ -11,3 +11,11 @@ Author: Owen Michuda
 * [Cinder](https://libcinder.org/)
 * [SQLite](https://www.sqlite.org/index.html)
 * [sql-modern-cpp](https://github.com/SqliteModernCpp/sqlite_modern_cpp)
+* [gflags](https://github.com/gflags/gflags)
+
+## Controls
+* Enter desired attributes into gflags
+* Run the program
+* | Key       | Action                                                      |
+  |---------- |-------------------------------------------------------------|
+  | `space`   | Pauses and resumes the workout                              |
