@@ -37,6 +37,7 @@ class MyApp : public cinder::app::App {
   void DrawBackground();
   void DrawTimer();
   void DrawText();
+  void DrawFinish();
  public:
   MyApp();
   void setup() override;

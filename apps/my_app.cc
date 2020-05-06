@@ -140,14 +140,19 @@ void MyApp::update() {
     if (time_since_switch > seconds(kTimeForExercise)) {
       last_switch_ = time;
       timer_.start(0);
-      ++exercise_index_;
-      current_exercise_ = exercise_vec_.at(exercise_index_);
+      if (exercise_index_ != exercise_vec_.size() - 1) {
+        ++exercise_index_;
+        current_exercise_ = exercise_vec_.at(exercise_index_);
+      }
+      if (exercise_index_ == exercise_vec_.size() - 1) {
+        state_ = State::kFinished;
+      }
     }
   }
 
   if (state_ == State::kFinished) {
     timer_.stop();
-    // workouts_database_.AddWorkoutToDatabase(plan_);
+    workouts_database_.AddWorkoutToDatabase(plan_);
   }
 
   if (state_ == State::kPaused) {
@@ -218,11 +223,36 @@ void MyApp::DrawText() {
 
   cinder::gl::draw(desc_texture, desc_loc);
 }
+void MyApp::DrawFinish() {
+  const string finish_message = "Congratulations! You have completed your workout. Judging on your last few workouts, you should work on theses areas next:";
+  const Font finish_font = Font("Papyrus", 100);
+  TextBox finish_tbox = TextBox()
+      .alignment(TextBox::CENTER)
+      .font(finish_font)
+      .size(getWindowSize().x * (0.75), TextBox::GROW)
+      .color(kWhite)
+      .backgroundColor(cinder::ColorA(0, 0, 0, 0))
+      .text(finish_message);
+  TextureRef finish_texture = cinder::gl::Texture2d::create(finish_tbox.render());
+
+  const float finish_tbox_x = finish_tbox.measure().x;
+  const float finish_tbox_y = finish_tbox.measure().y;
+  const ivec2 finish_loc = {getWindowCenter().x - finish_tbox_x / 2, getWindowCenter().y * (0.5) - finish_tbox_y / 2};
+
+  cinder::gl::draw(finish_texture, finish_loc);
+}
 
 void MyApp::draw() {
   DrawBackground();
-  DrawTimer();
-  DrawText();
+
+  if (state_ == State::kContinue || state_ == State::kPaused) {
+    DrawTimer();
+    DrawText();
+  }
+
+  if (state_ == State::kFinished) {
+    DrawFinish();
+  }
 }
 
 void MyApp::keyDown(KeyEvent event) {

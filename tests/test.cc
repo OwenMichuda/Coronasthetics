@@ -28,3 +28,11 @@ TEST_CASE("Testing GetExercises") {
     std::cout << exercise.name_ << std::endl;
   }
 }
+
+TEST_CASE("Workouts database") {
+  workout::WorkoutsDatabase workout_database((cinder::app::getAssetPath("past_workouts.db").string()));
+  workout::ExerciseDatabase exercise_database(cinder::app::getAssetPath("exercises.db").string());
+  workout::Plan plan = workout::Plan(true, false, true, false, true, false);
+  plan.GeneratePlan(exercise_database);
+  workout_database.AddWorkoutToDatabase(plan);
+}

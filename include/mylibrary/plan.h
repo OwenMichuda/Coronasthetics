@@ -14,14 +14,13 @@
 namespace workout {
 
 class Plan {
- private:
+ public:
   bool arms_;
   bool shoulders_;
   bool chest_;
   bool core_;
   bool back_;
   bool legs_;
- public:
   std::vector<Exercise> exercises_;
   explicit Plan(bool arms, bool shoulders, bool chest, bool core, bool back, bool legs);
   void GeneratePlan(ExerciseDatabase &database);

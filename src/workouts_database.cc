@@ -10,7 +10,12 @@ namespace workout {
 WorkoutsDatabase :: WorkoutsDatabase(const std::string& db_path) : database_{db_path} {
   database_ << "CREATE TABLE if not exists workouts (\n"
          "date TEXT NOT NULL, \n"
-         "exercises TEXT NOT NULL\n"
+         "arms BOOLEAN, \n"
+         "shoulders BOOLEAN, \n"
+         "chest BOOLEAN, \n"
+         "core BOOLEAN, \n"
+         "back BOOLEAN, \n"
+         "legs BOOLEAN\n"
          ");";
 }
 
@@ -21,18 +26,56 @@ void WorkoutsDatabase :: AddWorkoutToDatabase(const Plan& plan) {
   char* date = ctime(&now);
   std::string date_str(date);
 
-  // This takes all the exercises and changes it into one string
-  std::string exercises_str;
-  for (Exercise exercise : plan.exercises_) {
-    exercises_str.append(exercise.name_);
-    while (exercise.name_ != plan.exercises_.back().name_) {
-      exercises_str.append(", ");
-    }
+  std::string arms;
+  if (plan.arms_) {
+    arms = "TRUE";
+  } else {
+    arms = "FALSE";
   }
 
-  database_ << "insert into workouts (date,exercises) values (?,?);"
-      << "test"
-      << exercises_str;
+  std::string shoulders;
+  if (plan.shoulders_) {
+    shoulders = "TRUE";
+  } else {
+    shoulders = "FALSE";
+  }
+
+  std::string chest;
+  if (plan.chest_) {
+    chest = "TRUE";
+  } else {
+    chest = "FALSE";
+  }
+
+  std::string core;
+  if (plan.core_) {
+    core = "TRUE";
+  } else {
+    core = "FALSE";
+  }
+
+  std::string back;
+  if (plan.back_) {
+    back = "TRUE";
+  } else {
+    back = "FALSE";
+  }
+
+  std::string legs;
+  if (plan.legs_) {
+    legs = "TRUE";
+  } else {
+    legs = "FALSE";
+  }
+
+  database_ << "insert into workouts (date,arms,shoulders,chest,core,back,legs) values (?,?,?,?,?,?,?);"
+      << date_str
+      << arms
+      << shoulders
+      << chest
+      << core
+      << back
+      << legs;
 }
 
 }
