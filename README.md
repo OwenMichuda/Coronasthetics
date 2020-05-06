@@ -13,7 +13,7 @@ Author: Owen Michuda
 * [sql-modern-cpp](https://github.com/SqliteModernCpp/sqlite_modern_cpp)
 * [gflags](https://github.com/gflags/gflags)
 
-## Controls
+## How to Run
 * Enter desired attributes into gflags
 * Run the program
 * | Key       | Action                                                      |
