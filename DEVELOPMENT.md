@@ -13,3 +13,16 @@
     - Made the timer in the middle of the screen that dictates how long to do each exercises.
     - Started working on adding the exercise name and description to the screen.
     - Ran into a hitch, yet to figure it out. "Vector iterator is not dereferenable"
+    
+- **5/5/20** Debugging
+    - I spent the majority of this day trying to figure out what the problem was with the exercise database.
+        - 2 office hour sessions
+        - 3 piazza posts
+        - Still failed :(
+    - Unfortunately, still not working, so have to use a hardcoded vector for now
+    
+- **5/6/20** Finishing touches
+    - Implemented the next workout algorithm.
+    - Cleaned up the project.
+    - Added javadoc comments.
+    - Added tests.
