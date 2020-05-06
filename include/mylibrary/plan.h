@@ -23,9 +23,8 @@ class Plan {
   bool legs_;
  public:
   std::vector<Exercise> exercises_;
-  Exercise GetExerciseAtIndex(int index);
   explicit Plan(bool arms, bool shoulders, bool chest, bool core, bool back, bool legs);
-  void GeneratePlan(ExerciseDatabase database);
+  void GeneratePlan(ExerciseDatabase &database);
 };
 
 }

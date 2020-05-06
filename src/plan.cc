@@ -19,11 +19,13 @@ Plan::Plan(bool arms, bool shoulders, bool chest, bool core, bool back,
   legs_ = legs;
 }
 
-void Plan::GeneratePlan(ExerciseDatabase database) {
-  workout::Exercise test = workout::Exercise("test", "test", "test");
-  exercises_.push_back(test);
+// Unfortunately the querying isn't working properly, so I have to temporarily
+// return a hardcoded vector of Exercises. We couldn't figure it out, even after
+// two office hour sessions and multiple Piazza posts. :(
+void Plan::GeneratePlan(ExerciseDatabase &database) {
+  exercises_ = std::vector<Exercise>();
   if (arms_) {
-    for (const Exercise& arms_exercise : database.GetTargetExercises("arms", 5)) {
+    for (const Exercise& arms_exercise : database.GetTargetExercises("arms", kLimit)) {
       exercises_.push_back(arms_exercise);
     }
   }
@@ -57,9 +59,6 @@ void Plan::GeneratePlan(ExerciseDatabase database) {
       exercises_.push_back(legs_exercise);
     }
   }
-}
-Exercise Plan::GetExerciseAtIndex(int index) {
-  return exercises_.at(index);
 }
 
 }

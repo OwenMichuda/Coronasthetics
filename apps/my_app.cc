@@ -48,26 +48,13 @@ MyApp::MyApp()
       workouts_database_(cinder::app::getAssetPath("past_workouts.db").string()),
       add_exercise_{FLAGS_add_exercise},
       current_exercise_(),
+      exercise_vec_(),
       state_{State::kContinue} {
 }
 
 void MyApp::setup() {
   cinder::gl::enableDepthWrite();
   cinder::gl::enableDepthRead();
-
-  /*
-  workout::ExerciseDatabase test(cinder::app::getAssetPath("exercises.db").string());
-  std::vector<workout::Exercise> core_list = test.GetTargetExercises("core", 5);
-  for (workout::Exercise core : core_list) {
-    std::cout << core.name_ << std::endl;
-  }
-
-  workout::Plan plan = workout::Plan(true, false, true, false, true, false);
-  plan.GeneratePlan(test);
-  for (workout::Exercise exercise : plan.exercises_) {
-    std::cout << exercise.name_ << std::endl;
-  }
-   */
 
   workout::ExerciseDatabase exercise_database(cinder::app::getAssetPath("C:\\Users\\Owen Michuda\\Downloads\\cinder_0.9.2_vc2015\\cinder_0.9.2_vc2015\\my-projects\\final-project\\assets\\exercises.db").string());
 
@@ -76,8 +63,62 @@ void MyApp::setup() {
     exercise_database.AddExerciseToDatabase(new_exercise);
   }
 
+  /*
+  plan_.exercises_.clear();
   plan_.GeneratePlan(exercise_database);
   current_exercise_ = plan_.exercises_.front();
+  */
+
+  // Unfortunately the database querying isn't working, even after two office
+  // hour sessions and multiple piazza posts. The TA's recommend I use a
+  // temporary vector of Exercise instances instead.
+  if (FLAGS_arms) {
+    exercise_vec_.push_back(Exercise("dips", "position yourself on an elevated surface, with your hands shoulder width apart. slide your butt off the front off the surface. lower yourself down until your elbows form a 90 degree angle. push yourself back up.", "arms"));
+    exercise_vec_.push_back(Exercise("diamond push ups", "get into the push up position, but with your hands close together, forming a diamond with your fingers. lower yourself down until your chest is barely above the ground, and push yourself back up.", "arms"));
+    exercise_vec_.push_back(Exercise("chin ups", "grip an overhead bar with a supinated grip, shoulder width apart. pull your chip up towards the bar, as high as possible. lower yourself back down.", "arms"));
+    exercise_vec_.push_back(Exercise("five finger high planks", "get into the push up position, but push yourself up so your weight is only on your fingers and your palms are not touching the ground. hold this position.", "arms"));
+    exercise_vec_.push_back(Exercise("inverted rows", "position yourself underneath a bar about waist height. grab the bar with an overhead grip, slightly wider than shoulder width. pull yourself up until your chest is almost touching the bar. lower yourself back down.", "arms"));
+  }
+
+  if (FLAGS_back) {
+    exercise_vec_.push_back(Exercise("superman", "lay down on the floor, with arms and legs completely extended. lift your arms and legs slightly off the ground, so your weight is on your stomach. hold this position.", "back"));
+    exercise_vec_.push_back(Exercise("doorway row", "position yourself into a semi squat so you are facing a door frame. grab onto the door frame with one hand, and pull yourself into the door frame. slowly extend your arm again to return to the starting position.", "back"));
+    exercise_vec_.push_back(Exercise("full bridge", "start by lying with your back on the ground. place your hands beside your head and turn so your fingers point towards your feet. bring your hips up as you round your back, while continuously squeezing your butt and leg muscles. hold this position.", "back"));
+    exercise_vec_.push_back(Exercise("reverse snow angels", "pretend to make snow angels, but laying with your stomach on the ground. make sure your arms and legs are not touching the ground.", "back"));
+    exercise_vec_.push_back(Exercise("bird dogs", "go on all fours, with your back parallel to the ground. simultaneously raise your left arm and your right leg, extended them outwards. lower back to the ground, and alternate.", "back"));
+  }
+
+  if (FLAGS_chest) {
+    exercise_vec_.push_back(Exercise("negative push ups", "start in the push up position, and lower yourself until your chest is just above the ground. at this point, let your knees drop, and extend your arms, pushing yourself back up. lift your knees off the ground and repeat.", "chest"));
+    exercise_vec_.push_back(Exercise("no arm push up", "get into a plank position, keeping your forearms on the ground. pretend to do a push up, but with only your chest/back.", "chest"));
+    exercise_vec_.push_back(Exercise("isometric chest squeezes", "press your hands together, at the bottom of the palms of your hands. bend your arms at a 90 degree angle, contracting your chest the entire time. hold this position, then slowly return to the starting position, relieving some of the tension along the way.", "chest"));
+    exercise_vec_.push_back(Exercise("push back push up", "start out in traditional push up position. instead of pushing up on the return, push straight back, so your knees bend and your butt is above your ankles.", "chest"));
+    exercise_vec_.push_back(Exercise("rotational push ups", "perform a normal push up, but on the way up, rotate your body so it faces one direction. extend your arm straight out, to form a T frame. return to the starting position and alternate.", "chest"));
+  }
+
+  if (FLAGS_core) {
+    exercise_vec_.push_back(Exercise("crunches", "laying with your back on the ground and your knees bent, curl your torso up until your shoulder blades are off the floor.", "core"));
+    exercise_vec_.push_back(Exercise("bear crawl", "get into the crawl position, with your knees off the ground. as you move your left hand forward, move your right leg forward as well. alternate until you can't go any further.", "core"));
+    exercise_vec_.push_back(Exercise("v ups", "lay on the floor, and lift your legs straight up and your upper body up as well until you achieve a v shape.", "core"));
+    exercise_vec_.push_back(Exercise("sit up", "lie on your back, with your knees bent and hands crossed over your chest. lift your upper body until you are sitting straight up. gently return to the ground.", "core"));
+    exercise_vec_.push_back(Exercise("plank", "get into the push up position, but with your forearms on the ground instead of your hands. squeeze your glutes and tighten your abdominals.", "core"));
+  }
+
+  if (FLAGS_legs) {
+    exercise_vec_.push_back(Exercise("squats", "stand with your head facing forward and your chest held up and out, and your feet shoulder width apart. sit down like your sitting into an imaginary chair. lower until your thighs are parallel to the floor, and return to the starting position.", "legs"));
+    exercise_vec_.push_back(Exercise("pistol squats", "stand with your feet shoulder width apart, and lift one leg in front of you. bend your knee and lower your hips back until as low as possible. return to the starting position and alternate.", "legs"));
+    exercise_vec_.push_back(Exercise("calf raises", "stand with your feet shoulder width apart. raise your heels off the floor and squeeze your calves. slowly return to the starting position.", "legs"));
+    exercise_vec_.push_back(Exercise("lunges", "stand with your feet shoulder width apart. take a step forward and slowly bend both knees, until the back knee is barely above the ground. return to the starting position and alternate.", "legs"));
+    exercise_vec_.push_back(Exercise("elevated glute bridges", "lie face up on the floor, with your knees bent and feet resting on an elevated surface. lift your hips off the ground until your knees to your shoulders form a straight line. return to the starting position.", "legs"));
+  }
+
+  if (FLAGS_shoulders) {
+    exercise_vec_.push_back(Exercise("push ups", "get down on all fours, with your legs fully extended. place your hands slightly wider than shoulder width. lower yourself until your chest is just above the ground. return to the starting position.", "shoulders"));
+    exercise_vec_.push_back(Exercise("pike push ups", "get into an A frame position, keeping your head in between your arms. lower the top of your head slowly while bending your elbows. push yourself back up.", "shoulders"));
+    exercise_vec_.push_back(Exercise("maltese push ups", "get into push up position, but with your hands the opposite way. balance your torso upon your hands while placing them just above hip level. lower yourself to the ground, and push back up.", "shoulders"));
+    exercise_vec_.push_back(Exercise("wall walk", "begin in the push up position, with your feet against the wall. slowly walk your feet up the wall while concurrently bringing your hands closer to the wall. Continue to a height that feels safe, then slowly walk yourself back down.", "shoulders"));
+    exercise_vec_.push_back(Exercise("static handstand", "kick yourself up onto your hands, and balance your weight while keeping your body straight. practice next to a wall if needed.", "shoulders"));
+  }
 }
 
 void MyApp::update() {

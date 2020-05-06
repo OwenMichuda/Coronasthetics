@@ -28,6 +28,7 @@ class MyApp : public cinder::app::App {
   State state_;
   ci::Timer timer_;
   workout::Exercise current_exercise_;
+  std::vector<workout::Exercise> exercise_vec_;
  private:
   void DrawBackground();
   void DrawTimer();

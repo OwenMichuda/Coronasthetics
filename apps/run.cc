@@ -24,11 +24,11 @@ DEFINE_string(exercise_target_area, "core", "The target area of the exercise");
 DEFINE_string(exercise_description, "laying with your back on the ground and your knees bent, curl your torso up until your shoulder blades are off the floor.", "The description of the exercise");
 
 DEFINE_bool(arms, true, "Whether to include arms in the workout");
-DEFINE_bool(shoulders, false, "Whether to include shoulders in the workout");
+DEFINE_bool(shoulders, true, "Whether to include shoulders in the workout");
 DEFINE_bool(chest, false, "Whether to include chest in the workout");
 DEFINE_bool(core, false, "Whether to include core in the workout");
-DEFINE_bool(back, false, "Whether to include back in the workout");
-DEFINE_bool(legs, false, "Whether to include legs in the workout");
+DEFINE_bool(back, true, "Whether to include back in the workout");
+DEFINE_bool(legs, true, "Whether to include legs in the workout");
 
 void ParseArgs(vector<string>* args) {
   gflags::SetUsageMessage(
