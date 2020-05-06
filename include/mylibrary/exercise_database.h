@@ -18,8 +18,23 @@ class ExerciseDatabase {
  private:
   sqlite::database db_;
  public:
+  /**
+   * constructor
+   * @param db_path file path
+   */
   explicit ExerciseDatabase(const std::string& db_path);
-  void AddExerciseToDatabase(const Exercise&);
+  /**
+   * adds an exercise to the database
+   * @param exercise exercise to be added to database
+   */
+  void AddExerciseToDatabase(const Exercise& exercise);
+  /**
+   * returns a vector of exercises that correspond to the target_area
+   * inputted
+   * @param target_area wanted target_area
+   * @param limit limit of exercises to be returned
+   * @return vector of exercises
+   */
   std::vector<Exercise> GetTargetExercises(const std::string& target_area,
                                            const size_t limit);
 };

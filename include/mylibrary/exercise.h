@@ -14,6 +14,7 @@ class Exercise {
   std::string name_;
   std::string description_;
   std::string target_area_;
+  /** constructors */
   Exercise(const std::string& name, const std::string& description,
       const std::string& target_area);
   Exercise();

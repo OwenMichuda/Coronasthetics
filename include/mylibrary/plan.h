@@ -22,8 +22,14 @@ class Plan {
   bool back_;
   bool legs_;
   std::vector<Exercise> exercises_;
+  /** constructor */
   explicit Plan(bool arms, bool shoulders, bool chest,
                 bool core, bool back, bool legs);
+  /**
+   * generates a workout plan, populates the exercises_ vector with
+   * exercises from inputted ExerciseDatabase instance
+   * @param database where to pull exercises from
+   */
   void GeneratePlan(ExerciseDatabase &database);
 };
 

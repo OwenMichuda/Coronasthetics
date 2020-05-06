@@ -17,8 +17,21 @@ class WorkoutsDatabase {
  private:
   sqlite::database database_;
  public:
+  /**
+   * constructor
+   * @param db_path file path
+   */
   explicit WorkoutsDatabase(const std::string& db_path);
-  void AddWorkoutToDatabase(const Plan&);
+  /**
+   * adds an instance of plan class to this database
+   * @param plan plan to be added to database
+   */
+  void AddWorkoutToDatabase(const Plan& plan);
+  /**
+   * algorithm that determines what target areas the user should target
+   * next time they workout
+   * @return vector of strings corresponding to the target areas
+   */
   std::vector<std::string> RecommendedWorkout();
 };
 
