@@ -26,3 +26,5 @@
     - Cleaned up the project.
     - Added javadoc comments.
     - Added tests.
+    - Added PROPOSAL.md
+    - Wrote README.md
