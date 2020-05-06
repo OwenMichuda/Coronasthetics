@@ -9,6 +9,8 @@
 
 #include <catch2/catch.hpp>
 
+#include <fstream>
+
 TEST_CASE("Exercise Class") {
 
   SECTION("Basic constructor") {
@@ -123,5 +125,28 @@ TEST_CASE("ExerciseDatabase Class") {
 }
 
 TEST_CASE("WorkoutsDatabase Class") {
+  workout::WorkoutsDatabase workout_database(
+      "C:\\Users\\Owen Michuda\\Downloads\\cinder_0.9.2_vc2015\\"
+      "cinder_0.9.2_vc2015\\my-projects\\final-project\\assets\\test_1.db");
 
+  SECTION("Constructor: new table") {
+    std::ifstream file("C:\\Users\\Owen Michuda\\Downloads\\"
+        "cinder_0.9.2_vc2015\\cinder_0.9.2_vc2015\\my-projects\\"
+        "final-project\\assets\\test_1.db");
+    REQUIRE(file.good());
+  }
+
+  workout::Plan plan(false, true, true,
+                       true, true, false);
+  SECTION("AddWorkoutToDatabase and RecommendedWorkout functions") {
+    workout_database.AddWorkoutToDatabase(plan);
+    workout_database.AddWorkoutToDatabase(plan);
+    workout_database.AddWorkoutToDatabase(plan);
+    std::vector<std::string> recommended_ares =
+        workout_database.RecommendedWorkout();
+    REQUIRE(!recommended_ares.empty());
+    REQUIRE(recommended_ares.front() == "arms");
+    REQUIRE(recommended_ares.back() == "legs");
+
+  }
 }
