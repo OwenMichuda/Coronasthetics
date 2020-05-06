@@ -24,7 +24,7 @@ class MyApp : public cinder::app::App {
  private:
   workout::Plan plan_;
   bool add_exercise_;
-  workout::WorkoutsDatabase workouts_database_;
+  bool added_to_past_workouts_;
   State state_;
   ci::Timer timer_;
   workout::Exercise current_exercise_;

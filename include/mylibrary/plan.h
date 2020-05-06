@@ -22,7 +22,8 @@ class Plan {
   bool back_;
   bool legs_;
   std::vector<Exercise> exercises_;
-  explicit Plan(bool arms, bool shoulders, bool chest, bool core, bool back, bool legs);
+  explicit Plan(bool arms, bool shoulders, bool chest,
+                bool core, bool back, bool legs);
   void GeneratePlan(ExerciseDatabase &database);
 };
 

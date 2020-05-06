@@ -20,7 +20,8 @@ class ExerciseDatabase {
  public:
   explicit ExerciseDatabase(const std::string& db_path);
   void AddExerciseToDatabase(const Exercise&);
-  std::vector<Exercise> GetTargetExercises(const std::string& target_area, const size_t limit);
+  std::vector<Exercise> GetTargetExercises(const std::string& target_area,
+                                           const size_t limit);
 };
 
 }

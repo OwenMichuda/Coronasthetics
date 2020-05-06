@@ -68,7 +68,8 @@ void WorkoutsDatabase :: AddWorkoutToDatabase(const Plan& plan) {
     legs = "FALSE";
   }
 
-  database_ << "insert into workouts (date,arms,shoulders,chest,core,back,legs) values (?,?,?,?,?,?,?);"
+  database_ << "insert into workouts (date,arms,shoulders,chest,core,back,legs) "
+               "values (?,?,?,?,?,?,?);"
       << date_str
       << arms
       << shoulders

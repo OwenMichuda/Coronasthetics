@@ -37,7 +37,8 @@ std::vector<Exercise> GetExercises(sqlite::database_binder* rows) {
   return exercises;
 }
 
-std::vector<Exercise> ExerciseDatabase::GetTargetExercises(const std::string& target_area, const size_t limit) {
+std::vector<Exercise> ExerciseDatabase::GetTargetExercises(const std::string& target_area,
+                                                           const size_t limit) {
   auto rows = db_ << "select name,target,description "
                      "from exercises "
                      "where target = ? "
